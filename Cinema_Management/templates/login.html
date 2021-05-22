@@ -1,0 +1,62 @@
+
+{% extends "layout.html" %}\
+{% block otherstyle %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='login.css') }}">
+    
+{% endblock %}
+{% block content %}
+    <div class="main">
+        <div class="wrapper">
+        <div class="title-text">
+            <div class="title login">Login</div>
+            <div class="title signup">Signup</div>
+        </div>
+        <div class="form-container">
+            <div class="slide-controls">
+            <input type="radio" name="slide" id="login" checked>
+            <input type="radio" name="slide" id="signup">
+            <label for="login" class="slide login">Login</label>
+            <label for="signup" class="slide signup">Signup</label>
+            <div class="slider-tab"></div>
+            </div>
+            <div class="form-inner">
+            <form class="login" id="signinform">
+                <div class="field">
+                <span class="fa fa-user icons" aria-hidden="true"></span>
+                <input type="email" placeholder="Email Address" required class="emailform">
+                </div>
+                <div class="field">
+                <span class="fa fa-lock icons" aria-hidden="true"></span>
+                <input type="password" placeholder="Password" required class="password">
+                </div>
+                <div class="field btn">
+                <div class="btn-layer"></div>
+                <input type="submit" value="Login">
+                </div>
+                <div class="signup-link">Don't have account? <a href="">Signup now</a></div>
+            </form>
+            <form class="signup" id="signupform">
+                <div class="field">
+                <span class="fa fa-user icons" aria-hidden="true"></span>
+                <input type="email" placeholder="Email Address" required class="emailform">
+                </div>
+                <div class="field">
+                <span class="fa fa-lock icons" aria-hidden="true"></span>
+                <input type="password" placeholder="Password" required class="password">
+                </div>
+                <div class="field">
+                <span class="fa fa-lock icons" aria-hidden="true"></span>
+                <input type="password" placeholder="Confirm password" required class="confirmPassword">
+                </div>
+                <div class="field btn">
+                <div class="btn-layer"></div>
+                <input type="submit" value="Signup">
+                </div>
+            </form>
+            </div>
+        </div>
+        </div>
+    </div>
+    
+{% endblock content %}
+

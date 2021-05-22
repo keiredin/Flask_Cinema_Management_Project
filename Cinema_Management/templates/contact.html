@@ -1,1 +1,70 @@
-<h1>Contact</h1>
+{% extends "layout.html" %}\
+{% block otherstyle %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='contact.css') }}">
+    
+{% endblock %}
+
+{% block content %}
+    <section class="contact">
+        <div class="content">
+            <h2>Get In Touch</h2>
+            <p>thanks for visiting! we are grateful that you’d like to get in touch with us.
+                If you have project idea in mind,comment,suggestion and so on don’t hesitate to get in touch. 
+                
+            </p>
+        </div>
+
+        <div class="container">
+            <div class="contactInfo">
+                <div class="box">
+                    <div class="icon"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
+                    <div class="text">
+                        <h3>Address</h3>
+                        <p>Addis Ababa,5 kilo around AAit</p>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="icon"><i class="fa fa-phone" aria-hidden="true"></i></div>
+                    <div class="text">
+                        <h3>Phone</h3>
+                        <a  href="tell://"><p>22-445-4567</p></a>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="icon"><i class="fa fa-envelope-o" aria-hidden="true"></i></div>
+                    <div class="text">
+                        <h3>Email</h3>
+                        <a href="mailto:info@dreamCinema.com"  data-abc="true">info@dreamCinema.com</a></li>
+                    </div>
+                </div>
+            </div>
+            <div class="contactForm">
+                <form  method="post" action="mailto:keiredinaman@gmail.com" class="mailform">
+                    <h2>Send Message</h2>
+                    <div class="inputBox">
+                        <input type="text" name="" id="name" required="required">
+                        <span>Full Name</span>
+                        
+                    </div>
+                    <div class="inputBox">
+                        <input type="email" name="email" id="mail" required="required">
+                        <span>Email</span>
+                        
+                    </div>
+                    <div class="inputBox">
+                        <textarea name="message" cols="30" rows="5" required="required" id="message"></textarea>
+                        <span>Message...</span>
+                        
+                    </div>
+                    <div class="inputBox">
+                        <input  type="submit" name="" id="submit" value= "Send" >
+                    
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

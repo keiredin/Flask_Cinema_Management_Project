@@ -3,6 +3,7 @@ from enum import unique
 from Cinema_Management import db,login_manager,bcrypt
 from flask_login import UserMixin
 
+
 class Client(db.Model):
     __table__name = "Clients"
 
