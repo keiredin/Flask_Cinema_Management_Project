@@ -1,11 +1,170 @@
 {% extends "layout.html" %}
 
 {% block otherstyle %}
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
 {% endblock %}
 	
 
 {% block content %}
+    <!-- Top Shows Container -->
+    <div class="container mt-3">
+        <h1>Today Shows</h1>
+        <div id="top-shows" class="carousel slide carousel_slider" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 col-sm-12 topShowCard">
+                            <div class="card topShowCard">
+                                <img class="img-fluid topShowsImage" alt="100%x100%"
+                                    src="{{ url_for('static', filename='malificent.jpg') }}">
+                                <div class="card-body">
+                                    <h4 class="card-title">Malificent</h4>
+                                    <a class="btn topShowBtn" href="cinema.html?id=111" target="_blank">Get Ticket</a>
 
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12 topShowCard">
+                            <div class="card topShowCard">
+                                <img class="img-fluid topShowsImage" alt="100%x100%" src="{{ url_for('static', filename='images/aqua.jpg') }}">
+                                <div class="card-body">
+                                    <h4 class="card-title">Aqua Man</h4>
+                                    <a class="btn topShowBtn" href="cinema.html?id=112" target="_blank">Get Ticket</a>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12 topShowCard">
+                            <div class="card">
+                                <img class="img-fluid topShowsImage" alt="100%x100%"
+                                    src="{{ url_for('static', filename='images/ferdinand.jpg') }}">
+                                <div class="card-body">
+                                    <h4 class="card-title">Ferdinand</h4>
+                                    <a class="btn topShowBtn" href="cinema.html?id=113" target="_blank">Get Ticket</a>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12 topShowCard">
+                            <div class="card">
+                                <img class="img-fluid topShowsImage" alt="100%x100%" src="{{ url_for('static', filename='images/12yr.jpg') }}">
+                                <div class="card-body">
+                                    <h4 class="card-title">12 Years a Slave</h4>
+                                    <a class="btn topShowBtn" href="cinema.html?id=114" target="_blank">Get Ticket</a>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 col-sm-12 topShowCard">
+                            <div class="card topShowCard">
+                                <img class="img-fluid topShowsImage" alt="100%x100%" src="{{ url_for('static', filename='images/MI.jpg') }}">
+                                <div class="card-body">
+                                    <h4 class="card-title">Mission: Impossible</h4>
+                                    <a class="btn topShowBtn" href="cinema.html?id=115" target="_blank">Get Ticket</a>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 col-sm-12 topShowCard">
+                            <div class="card">
+                                <img class="img-fluid topShowsImage" alt="100%x100%"
+                                    src="{{ url_for('static', filename='images/persuitOf happiness.jpg') }}">
+                                <div class="card-body">
+                                    <h4 class="card-title">The Pursuit of Happiness</h4>
+                                    <a class="btn topShowBtn" href="cinema.html?id=116" target="_blank">Get Ticket</a>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12 topShowCard">
+                            <div class="card topShowCard">
+                                <img class="img-fluid topShowsImage" alt="100%x100%"
+                                    src="{{ url_for('static', filename='images/pocccccccc.jpg') }}">
+                                <div class="card-body">
+                                    <h4 class="card-title">Pirates of the Carribean</h4>
+                                    <a class="btn topShowBtn" href="cinema.html?id=117" target="_blank">Get Ticket</a>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-lg-3 col-md-6 col-sm-12 topShowCard">
+                            <div class="card">
+                                <img class="img-fluid topShowsImage" alt="100%x100%" src="{{ url_for('static', filename='images/wick.jpg') }}">
+                                <div class="card-body">
+                                    <h4 class="card-title">John Wick: Chapter 3</h4>
+                                    <a class="btn topShowBtn" href="cinema.html?id=118" target="_blank">Get Ticket</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="row">
+
+                        <div class=" col-lg-3 col-md-6 col-sm-12 topShowCard">
+                            <div class="card">
+                                <img class="img-fluid topShowsImage" alt="100%x100%" src="{{ url_for('static', filename='images/bppp.jpg') }}">
+                                <div class="card-body">
+                                    <h4 class="card-title">Black Panther</h4>
+                                    <a class="btn topShowBtn" href="cinema.html?id=119" target="_blank">Get Ticket</a>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12 topShowCard">
+                            <div class="card">
+                                <img class="img-fluid topShowsImage" alt="100%x100%" src="{{ url_for('static', filename='images/endgame.jpg') }}">
+                                <div class="card-body">
+                                    <h4 class="card-title">Avengers Endgame</h4>
+                                    <a class="btn topShowBtn" href="cinema.html?id=120" target="_blank">Get Ticket</a>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12 topShowCard">
+                            <div class="card">
+                                <img class="img-fluid topShowsImage" alt="100%x100%" src="{{ url_for('static', filename='images/GOT.jpg') }}">
+                                <div class="card-body">
+                                    <h4 class="card-title">Game of Thrones</h4>
+                                    <a class="btn topShowBtn" href="cinema.html?id=121" target="_blank">Get Ticket</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 col-sm-12 topShowCard">
+                            <div class="card">
+                                <img class="img-fluid topShowsImage" alt="100%x100%" src="{{ url_for('static', filename='images/Thor3.jpg') }}">
+                                <div class="card-body">
+                                    <h4 class="card-title">Thor Ragnarok</h4>
+                                    <a class="btn topShowBtn" href="cinema.html?id=122" target="_blank">Get Ticket</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="arrow">
+                <a class="btn " href="#top-shows" role="button" data-slide="prev">
+                    <i class="fa fa-arrow-left"></i>
+                </a>
+                <a class="btn " href="#top-shows" role="button" data-slide="next">
+                    <i class="fa fa-arrow-right"></i>
+                </a>
+            </div>
+
+        </div>
+    </div>
 {% endblock content %}
