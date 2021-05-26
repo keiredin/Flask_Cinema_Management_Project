@@ -29,6 +29,7 @@ $(document).ready(function () {
         }
         $('#len'+(i++)).toggleClass('bounce');
       }, 500)
+      
    $(window).scroll(function () {
       if ($(this).scrollTop() < 70) {
          $(".navbar").removeClass("navbarNotSoFat");
