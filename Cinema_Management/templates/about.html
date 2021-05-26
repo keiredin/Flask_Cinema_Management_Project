@@ -1,0 +1,87 @@
+{% extends "layout.html" %}
+{% block otherstyle %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/about.css') }}"> 
+{% endblock %}
+
+{% block content %}
+    <div class="topImage d-flex justify-content-center">
+        <img src=" {{ url_for('static', filename='images/dream.jpg') }}" alt="" class="titleImg">
+        <div class="text-block text-center"><h3>Dream Cinema, Proud to be serving you</h3></div>
+    </div>
+    <div class="container">
+    <h1>Introduce ourselves</h1>
+    <hr id="introHr">
+    <p>Dream Cinema is a world class cinema which provides world class movies, tv series and cartoons. We are proud to serve everyone.
+        We       
+        <br>The services we give are 
+            <li>
+                Amharic movies.
+            </li>
+            <li>
+                English movies and series.
+            </li>
+            <li>
+                Indian movies.
+            </li>
+
+            </p>
+    <div class="row">
+    <div class="col-md-4">
+        <div class="card" style="width: 90%;">
+        <img class="card-img-top" src="{{ url_for('static', filename='images/vision.jpg') }}" alt="caption">
+        <div class="card-body">
+            <h5 class="card-title">Vision</h5>
+            <hr>
+            <p class="card-text">Our vision is to build dream cinema into a bigger company. We hope that one day there will be a company called
+            Dream company that would have 
+            <li>Commercial Hall</li>
+            <li>Cinema</li>
+            <li>Manufacturing factory</li>
+            We dream one day our people will be able to do things easily using computer technologies.
+            </p>
+        </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card" style="width: 90%;">
+        <img class="card-img-top" src="{{ url_for('static', filename='images/mission.png') }}" alt="caption">
+        <div class="card-body">
+            <h5 class="card-title">Mission</h5>
+            <hr>
+            <p class="card-text">Our mission is to 
+            <li>entertain the people with movies</li>
+            <li>make cinema technology modern</li>
+            <li>make life easier through technology</li>
+            </p>
+        </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card" style="width: 90%;">
+        <img class="card-img-top" src="{{ url_for('static', filename='images/purpose.png') }}" alt="caption">
+        <div class="card-body">
+            <h5 class="card-title">Team</h5>
+            <hr>
+            <p class="card-text">Our team is composed of four people who are commited to serve the people well.
+            <br>These are
+            <li>Keiredin Aman</li>
+            <li>Maruf Sherefa</li>
+            <li>Mebea Nibret</li>
+            <li>Teklemariam Alazar</li>
+            </p>
+        </div>
+        </div>
+    </div>
+    </div>  
+
+
+
+
+    <div class="row mt-5">
+        <iframe id="map" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1970.1280146629626!2d38.763317!3d9.040394000000001!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x2321687a606863f3!2sAddis%20Ababa%20Institute%20of%20Technology!5e0!3m2!1sen!2set!4v1612656123457!5m2!1sen!2set" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>        
+    </div>
+    </div>
+
+{% endblock content %}

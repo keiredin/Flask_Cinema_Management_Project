@@ -1,7 +1,7 @@
 
-{% extends "layout.html" %}\
+{% extends "layout.html" %}
 {% block otherstyle %}
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='login.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css') }}">
     
 {% endblock %}
 {% block content %}
@@ -20,14 +20,14 @@
             <div class="slider-tab"></div>
             </div>
             <div class="form-inner">
-            <form class="login" id="signinform">
+            <form class="login" id="signinform" method="POST" action="">
                 <div class="field">
                 <span class="fa fa-user icons" aria-hidden="true"></span>
-                <input type="email" placeholder="Email Address" required class="emailform">
+                <input type="email" placeholder="Email Address" name="userEmail" required class="emailform">
                 </div>
                 <div class="field">
                 <span class="fa fa-lock icons" aria-hidden="true"></span>
-                <input type="password" placeholder="Password" required class="password">
+                <input type="password" placeholder="Password" name="userPassword" required class="password">
                 </div>
                 <div class="field btn">
                 <div class="btn-layer"></div>
@@ -35,14 +35,14 @@
                 </div>
                 <div class="signup-link">Don't have account? <a href="">Signup now</a></div>
             </form>
-            <form class="signup" id="signupform">
+            <form class="signup" id="signupform" method="POST" action="">
                 <div class="field">
                 <span class="fa fa-user icons" aria-hidden="true"></span>
-                <input type="email" placeholder="Email Address" required class="emailform">
+                <input type="email" placeholder="Email Address" name="userEmail" required class="emailform">
                 </div>
                 <div class="field">
                 <span class="fa fa-lock icons" aria-hidden="true"></span>
-                <input type="password" placeholder="Password" required class="password">
+                <input type="password" placeholder="Password" name="userPassword" required class="password">
                 </div>
                 <div class="field">
                 <span class="fa fa-lock icons" aria-hidden="true"></span>
@@ -59,4 +59,8 @@
     </div>
     
 {% endblock content %}
+{% block otherjs%}
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+{%endblock%}
+
 

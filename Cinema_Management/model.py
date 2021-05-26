@@ -1,6 +1,6 @@
 from datetime import datetime
 from enum import unique
-from Cinema_Management import db,login_manager,bcrypt
+from Cinema_Management import db,bcrypt #login_manager,
 from flask_login import UserMixin
 
 
