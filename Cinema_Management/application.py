@@ -3,7 +3,7 @@ from flask import render_template, url_for, flash, redirect,request
 from flask_login.utils import confirm_login
 from Cinema_Management import app,db,bcrypt
 from flask_login import login_user, logout_user, current_user, login_required
-from Cinema_Management.model import Client, Movie
+from Cinema_Management.model import Client, Comment, Movie
 from Cinema_Management.forms import LoginForm, RegistrationForm
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
@@ -12,11 +12,13 @@ from werkzeug.security import check_password_hash, generate_password_hash
 admin = Admin(app)
 admin.add_view(ModelView(Client, db.session))
 admin.add_view(ModelView(Movie, db.session))
+admin.add_view(ModelView(Comment, db.session))
 
 @app.route("/")
 @app.route("/index")
 def index():
-    return render_template('index.html')
+    movies = Movie.query.all()
+    return render_template("index.html", movies=movies)
 
 @app.route('/about')
 def about():
@@ -78,10 +80,10 @@ def logout():
 def account():
     return render_template('account.html', title='Account')
 
-@app.route("/cinema")
-def cinema():
-
-    return render_template('cinema.html', title='Cinema')
+@app.route("/cinema/<int:id>")
+def cinema(id):
+    movie = Movie.query.filter_by(id=id).first()
+    return render_template('cinema.html', title=movie.title, movie=movie)
 
 
 @app.errorhandler(404)

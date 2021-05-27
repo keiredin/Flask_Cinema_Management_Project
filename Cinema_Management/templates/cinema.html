@@ -1,7 +1,8 @@
 {% extends "layout.html" %}
 
 {% block otherstyle %}
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/cinema.css') }}">
+   <link rel="stylesheet"  type="text/css" href="{{ url_for('static', filename='css/cinema.css') }}" >
+
 {% endblock %}
 
 {% block content %}
@@ -10,22 +11,22 @@
       <div>
         <div class="container-fluid mb-4">
           <div class="row">
-            <div class="col-md-2 px-0"><img class="img-fluid img-responsive poster " src=""
+            <div class="col-md-2 px-0"><img class="img-fluid img-responsive poster " src="../static/images/{{movie.postor}}"
                 style="opacity: 1;filter: blur(0px);"></div>
             <div class="col-md-10 ">
               <div class="card trans text-white h-100" style="border: none;">
                 <div class="card-header px-0" style="border: none;">
-                  <h5 class="mb-0  movieTitle h3"></h5>
+                  <h5 class="mb-0  movieTitle h3">{{movie.title}}</h5>
                 </div>
                 <div class="card-text">
-                  <div class="text-muted releaseDate d-inline cstext"></div>
-                  <div class="d-inline pl-2 cstext prodCompany" style="color: #0047ab;"></div>
+                  <div class="text-muted releaseDate d-inline cstext">{{movie.release}}</div>
+                  <div class="d-inline pl-2 cstext prodCompany" style="color: #0047ab;">{{movie.airedBy}}</div>
                 </div>
                 <i class="bottomBorder pt-3"></i>
                 <div class="card-body px-3">
                   <div class="row py-0">
                     <p class="ratingOverall shadow d-inline">
-                      0.0
+                      {{movie.idmbRating}}
                     </p>
                     <div class="pl-2 text-warning d-inline ratingStarsContainner">
                     </div>
@@ -59,9 +60,11 @@
                 Synopsis
               </p>
               <p class="desc h6 pb-1">
+                <h1>{{movie.description}}</h1>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis velit nobis, eaque tempore aperiam
                 ducimus neque ipsam harum necessitatibus, unde modi exercitationem totam beatae odit blanditiis, amet
                 enim rerum. Dolore?
+                
               </p>
               <i class="d-block w-100 bottomBorder"></i>
             </div>
@@ -82,7 +85,7 @@
           <div class="tab-pane" role="tabpanel" id="tab-2">
             <p class="h5 pb-2 text-white">Video trailer</p>
             <div class="embed-responsive embed-responsive-16by9">
-              <iframe class="embed-responsive-item videoTrailer" src="" allowfullscreen></iframe>
+              <iframe class="embed-responsive-item videoTrailer" src="{{movie.trailer}}" allowfullscreen></iframe>
             </div>
           </div>
         </div>
@@ -112,3 +115,8 @@
     </div>
   </div>
 {% endblock content %}
+
+{% block otherjs%}
+   
+{%endblock%}
+ <!-- <script src="{{ url_for('static', filename='js/cinema.js') }}"></script> -->

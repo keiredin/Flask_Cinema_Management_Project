@@ -73,8 +73,17 @@
                                 <img class="img-fluid topShowsImage" alt="100%x100%"
                                     src="{{ url_for('static', filename='images/malificent.jpg') }}">
                                 <div class="card-body">
-                                    <h4 class="card-title">Malificent</h4>
-                                    <a class="btn topShowBtn" href="{{ url_for('cinema') }}" target="_blank">Get Ticket</a>
+                                    {% block ticket%}
+                                        Mid = 1
+                                        <h4 class="card-title">Malificent</h4>
+                                        {% for movie in movies%}
+                                            {% if movie.title == "Mebea's" %}
+                                                <a class="btn topShowBtn" href="{{ url_for('cinema',id=movie.id) }}" target="_blank">Get Ticket</a>
+                                                
+                                            {% endif %}
+                                        {% endfor %}
+                                        
+                                    {% endblock %}
 
                                 </div>
 
@@ -85,7 +94,7 @@
                                 <img class="img-fluid topShowsImage" alt="100%x100%" src="{{ url_for('static', filename='images/aqua.jpg') }}">
                                 <div class="card-body">
                                     <h4 class="card-title">Aqua Man</h4>
-                                    <a class="btn topShowBtn" href="{{ url_for('cinema') }}" target="_blank">Get Ticket</a>
+                                    <a class="btn topShowBtn" href="{{ url_for('cinema',id=1) }}" target="_blank">Get Ticket</a>
 
                                 </div>
                             </div>
@@ -95,9 +104,14 @@
                                 <img class="img-fluid topShowsImage" alt="100%x100%"
                                     src="{{ url_for('static', filename='images/ferdinand.jpg') }}">
                                 <div class="card-body">
-                                    <h4 class="card-title">Ferdinand</h4>
-                                    <a class="btn topShowBtn" href="{{ url_for('cinema') }}" target="_blank">Get Ticket</a>
-
+                                    
+                                        <h4 class="card-title">Ferdinand</h4>
+                                        {% for movie in movies%}
+                                            {% if movie.title == "Ferdinand" %}
+                                                <a class="btn topShowBtn" href="{{ url_for('cinema',id=movie.id) }}" target="_blank">Get Ticket</a>
+                                                
+                                            {% endif %}
+                                        {% endfor %}
                                 </div>
                             </div>
                         </div>
@@ -106,7 +120,7 @@
                                 <img class="img-fluid topShowsImage" alt="100%x100%" src="{{ url_for('static', filename='images/12yr.jpg') }}">
                                 <div class="card-body">
                                     <h4 class="card-title">12 Years a Slave</h4>
-                                    <a class="btn topShowBtn" href="{{ url_for('cinema') }}" target="_blank">Get Ticket</a>
+                                    <a class="btn topShowBtn" href="{{ url_for('cinema',id=1) }}" target="_blank">Get Ticket</a>
 
                                 </div>
                             </div>
@@ -122,7 +136,7 @@
                                 <img class="img-fluid topShowsImage" alt="100%x100%" src="{{ url_for('static', filename='images/MI.jpg') }}">
                                 <div class="card-body">
                                     <h4 class="card-title">Mission: Impossible</h4>
-                                    <a class="btn topShowBtn" href="{{ url_for('cinema') }}" target="_blank">Get Ticket</a>
+                                    <a class="btn topShowBtn" href="{{ url_for('cinema',id=1) }}" target="_blank">Get Ticket</a>
 
                                 </div>
                             </div>
@@ -134,7 +148,7 @@
                                     src="{{ url_for('static', filename='images/persuitOf happiness.jpg') }}">
                                 <div class="card-body">
                                     <h4 class="card-title">The Pursuit of Happiness</h4>
-                                    <a class="btn topShowBtn" href="{{ url_for('cinema') }}" target="_blank">Get Ticket</a>
+                                    <a class="btn topShowBtn" href="{{ url_for('cinema',id=1) }}" target="_blank">Get Ticket</a>
 
                                 </div>
 
@@ -146,7 +160,7 @@
                                     src="{{ url_for('static', filename='images/pocccccccc.jpg') }}">
                                 <div class="card-body">
                                     <h4 class="card-title">Pirates of the Carribean</h4>
-                                    <a class="btn topShowBtn" href="{{ url_for('cinema') }}" target="_blank">Get Ticket</a>
+                                    <a class="btn topShowBtn" href="{{ url_for('cinema',id=1) }}" target="_blank">Get Ticket</a>
                                 </div>
                             </div>
                         </div>
@@ -158,7 +172,7 @@
                                 <img class="img-fluid topShowsImage" alt="100%x100%" src="{{ url_for('static', filename='images/wick.jpg') }}">
                                 <div class="card-body">
                                     <h4 class="card-title">John Wick: Chapter 3</h4>
-                                    <a class="btn topShowBtn" href="{{ url_for('cinema') }}" target="_blank">Get Ticket</a>
+                                    <a class="btn topShowBtn" href="{{ url_for('cinema',id=1) }}" target="_blank">Get Ticket</a>
                                 </div>
                             </div>
                         </div>
@@ -172,7 +186,7 @@
                                 <img class="img-fluid topShowsImage" alt="100%x100%" src="{{ url_for('static', filename='images/bppp.jpg') }}">
                                 <div class="card-body">
                                     <h4 class="card-title">Black Panther</h4>
-                                    <a class="btn topShowBtn" href="{{ url_for('cinema') }}" target="_blank">Get Ticket</a>
+                                    <a class="btn topShowBtn" href="{{ url_for('cinema',id=1) }}" target="_blank">Get Ticket</a>
 
                                 </div>
 
@@ -183,7 +197,7 @@
                                 <img class="img-fluid topShowsImage" alt="100%x100%" src="{{ url_for('static', filename='images/endgame.jpg') }}">
                                 <div class="card-body">
                                     <h4 class="card-title">Avengers Endgame</h4>
-                                    <a class="btn topShowBtn" href="{{ url_for('cinema') }}" target="_blank">Get Ticket</a>
+                                    <a class="btn topShowBtn" href="{{ url_for('cinema',id=1) }}" target="_blank">Get Ticket</a>
 
                                 </div>
                             </div>
@@ -193,7 +207,7 @@
                                 <img class="img-fluid topShowsImage" alt="100%x100%" src="{{ url_for('static', filename='images/GOT.jpg') }}">
                                 <div class="card-body">
                                     <h4 class="card-title">Game of Thrones</h4>
-                                    <a class="btn topShowBtn" href="{{ url_for('cinema') }}" target="_blank">Get Ticket</a>
+                                    <a class="btn topShowBtn" href="{{ url_for('cinema',id=1) }}" target="_blank">Get Ticket</a>
                                 </div>
                             </div>
                         </div>
@@ -203,7 +217,7 @@
                                 <img class="img-fluid topShowsImage" alt="100%x100%" src="{{ url_for('static', filename='images/Thor3.jpg') }}">
                                 <div class="card-body">
                                     <h4 class="card-title">Thor Ragnarok</h4>
-                                    <a class="btn topShowBtn" href="{{ url_for('cinema') }}" target="_blank">Get Ticket</a>
+                                    <a class="btn topShowBtn" href="{{ url_for('cinema',id=1) }}" target="_blank">Get Ticket</a>
                                 </div>
                             </div>
                         </div>
@@ -233,7 +247,7 @@
                     <p><i>
                             <h4>Reserve Your Seat before You Miss Tommorow!!</h4>
                         </i> </p>
-                    <a href="{{ url_for('cinema') }}"><button class="btn btn-lg parallexBtn">Discover Now</button></a>
+                    <a href="{{ url_for('cinema',id=1) }}"><button class="btn btn-lg parallexBtn">Discover Now</button></a>
                 </div>
             </div>
         </div>
@@ -261,7 +275,7 @@
                                     alt="Thumbnail [100%x225]" src="{{ url_for('static', filename='images/NoTimeToDie.jpg') }}"
                                     data-holder-rendered="true">
                                 <div class="overlay">
-                                    <a class="info" href="{{ url_for('cinema') }}">Get Ticket</a>
+                                    <a class="info" href="{{ url_for('cinema',id=1) }}">Get Ticket</a>
                                 </div>
                                 <div class="card-body">
                                     <h4 class="card-title">No Time TO Die</h4>
@@ -276,7 +290,7 @@
                                     alt="Thumbnail [100%x225]" src="{{ url_for('static', filename='images/fast9.jpg') }}"
                                     data-holder-rendered="true">
                                 <div class="overlay">
-                                    <a class="info" href="{{ url_for('cinema') }}">Get Ticket</a>
+                                    <a class="info" href="{{ url_for('cinema',id=1) }}">Get Ticket</a>
                                 </div>
                                 <div class="card-body">
                                     <h4 class="card-title">Fast and Furious 9</h4>
@@ -291,7 +305,7 @@
                                     alt="Thumbnail [100%x225]" src="{{ url_for('static', filename='images/GodzilaVs.jpg') }}"
                                     data-holder-rendered="true">
                                 <div class="overlay">
-                                    <a class="info" href="{{ url_for('cinema') }}">Get Ticket</a>
+                                    <a class="info" href="{{ url_for('cinema',id=1) }}">Get Ticket</a>
                                 </div>
                                 <div class="card-body">
                                     <h4 class="card-title">Godzilla Vs Kong</h4>
@@ -305,7 +319,7 @@
                                     data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
                                     alt="Thumbnail [100%x225]" src="{{ url_for('static', filename='images/fre.jpg') }}" data-holder-rendered="true">
                                 <div class="overlay">
-                                    <a class="info" href="{{ url_for('cinema') }}">Get Ticket</a>
+                                    <a class="info" href="{{ url_for('cinema',id=1) }}">Get Ticket</a>
                                 </div>
                                 <div class="card-body">
                                     <h4 class="card-title">Free Guy 2021</h4>
@@ -328,7 +342,7 @@
                                     alt="Thumbnail [100%x225]" src="{{ url_for('static', filename='images/mulan.jpeg') }}"
                                     data-holder-rendered="true">
                                 <div class="overlay">
-                                    <a class="info" href="{{ url_for('cinema') }}">Get Ticket</a>
+                                    <a class="info" href="{{ url_for('cinema',id=1) }}">Get Ticket</a>
                                 </div>
                                 <div class="card-body">
                                     <h4 class="card-title">Mulan</h4>
@@ -343,7 +357,7 @@
                                     alt="Thumbnail [100%x225]" src="{{ url_for('static', filename='images/black widow.jpg') }}"
                                     data-holder-rendered="true">
                                 <div class="overlay">
-                                    <a class="info" href="{{ url_for('cinema') }}">Get Ticket</a>
+                                    <a class="info" href="{{ url_for('cinema',id=1) }}">Get Ticket</a>
                                 </div>
                                 <div class="card-body">
                                     <h4 class="card-title">Black Widow</h4>
@@ -358,7 +372,7 @@
                                     alt="Thumbnail [100%x225]" src="{{ url_for('static', filename='images/holidate.jpg') }}"
                                     data-holder-rendered="true">
                                 <div class="overlay">
-                                    <a class="info" href="{{ url_for('cinema') }}">Get Ticket</a>
+                                    <a class="info" href="{{ url_for('cinema',id=1) }}">Get Ticket</a>
                                 </div>
                                 <div class="card-body">
                                     <h4 class="card-title">Holidate</h4>
@@ -373,7 +387,7 @@
                                     alt="Thumbnail [100%x225]" src="{{ url_for('static', filename='images/jocker.jpg') }}"
                                     data-holder-rendered="true">
                                 <div class="overlay">
-                                    <a class="info" href="{{ url_for('cinema') }}">Get Ticket</a>
+                                    <a class="info" href="{{ url_for('cinema',id=1) }}">Get Ticket</a>
                                 </div>
                                 <div class="card-body">
                                     <h4 class="card-title">Joker 2</h4>
@@ -398,7 +412,7 @@
                                     alt="Thumbnail [100%x225]" src="{{ url_for('static', filename='images/croods.jpg') }}"
                                     data-holder-rendered="true">
                                 <div class="overlay">
-                                    <a class="info" href="{{ url_for('cinema') }}">Get Ticket</a>
+                                    <a class="info" href="{{ url_for('cinema',id=1) }}">Get Ticket</a>
                                 </div>
                                 <div class="card-body">
                                     <h4 class="card-title">Croods New Age</h4>
@@ -412,7 +426,7 @@
                                     data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
                                     alt="Thumbnail [100%x225]" src="{{ url_for('static', filename='images/tom.jpg') }}" data-holder-rendered="true">
                                 <div class="overlay">
-                                    <a class="info" href="{{ url_for('cinema') }}">Get Ticket</a>
+                                    <a class="info" href="{{ url_for('cinema',id=1) }}">Get Ticket</a>
                                 </div>
                                 <div class="card-body">
                                     <h4 class="card-title">Tom and Jerry</h4>
@@ -426,7 +440,7 @@
                                     data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
                                     alt="Thumbnail [100%x225]" src="{{ url_for('static', filename='images/raya.png') }}" data-holder-rendered="true">
                                 <div class="overlay">
-                                    <a class="info" href="{{ url_for('cinema') }}">Get Ticket</a>
+                                    <a class="info" href="{{ url_for('cinema',id=1) }}">Get Ticket</a>
                                 </div>
                                 <div class="card-body">
                                     <h4 class="card-title">Raya</h4>
@@ -440,7 +454,7 @@
                                     data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
                                     alt="Thumbnail [100%x225]" src="{{ url_for('static', filename='images/gru.jpg') }}" data-holder-rendered="true">
                                 <div class="overlay">
-                                    <a class="info" href="{{ url_for('cinema') }}">Get Ticket</a>
+                                    <a class="info" href="{{ url_for('cinema',id=1) }}">Get Ticket</a>
                                 </div>
                                 <div class="card-body">
                                     <h4 class="card-title">Rise of Gru</h4>

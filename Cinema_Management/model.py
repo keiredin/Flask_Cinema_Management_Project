@@ -34,3 +34,13 @@ class Movie(db.Model):
 
     def __repr__(self):
         return f"Movie('{self.title}')"
+
+class Comment(db.Model):
+    id = db.Column(db.Integer ,primary_key=True)
+    client_id = db.Column(db.Integer, db.ForeignKey('client.id'),nullable=False )
+    movie_id = db.Column(db.Integer , db.ForeignKey('movies.id'), nullable=False )
+    comment = db.Column(db.String(), nullable=False)
+
+    def __repr__(self):
+        return f"Comment('{self.comment}')"
+
