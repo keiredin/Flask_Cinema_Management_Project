@@ -1,4 +1,9 @@
 {% extends "layout.html" %}
+
+{% block otherstyle %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/cinema.css') }}">
+{% endblock %}
+
 {% block content %}
 <div class="content h-100 pb-5 py-4 mx-auto">
     <div class="px-3">

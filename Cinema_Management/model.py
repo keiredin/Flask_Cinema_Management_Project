@@ -28,6 +28,9 @@ class Movie(db.Model):
     screening = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     genre = db.Column(db.String(), nullable=False)
     idmbRating = db.Column(db.Float, nullable=False, default=0.0)
-    airedBy = db.Column(db.Column(db.String(), nullable=False))
-    release = db.Column(db.DateTime, nullable=False, nullable=False)
+    airedBy = db.Column(db.String(), nullable=False)
+    release = db.Column(db.DateTime, nullable=False)
     ticket = db.Column(db.String(), nullable=False)
+
+    def __repr__(self):
+        return f"Movie('{self.title}')"
