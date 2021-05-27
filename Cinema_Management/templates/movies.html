@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+      integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/movie.css') }}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{{ url_for('index') }}">Dream Cinema</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('index') }}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('about') }}">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="{{ url_for('movies') }}">Movies</a>
+            </li>
+          </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+      <form action="" method="POST" class="my-5">
+          <input type="search" id="form1" class="form-control w-50" name="search" placeholder="Search a movie" style="display: inline; margin-right: 0%;"/>
+          <button type="submit" class="btn" id="searchButton"><i class="fa fa-search fa-xs"></i></button>
+      </form>
+      
+
+      <div class="col-md-12">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+      </div>
+
+      {% if(movieSearch) %}
+      <div class="row">
+        {% for movie in movieSearch %}
+          <div class="col-md-4 my-3">
+              <div class="card">
+                  <img class="card-img-top" src="../static/images/{{movie.postor}}" alt="Card image cap">
+                  <div class="card-body">
+                  <h5 class="card-title">{{ movie.title }}</h5>
+                  <a href="{{ url_for('cinema', id=movie.id) }}" class="btn btn-info">View Details</a>
+                  </div>
+              </div>
+          </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <div class="row">
+          {% for movie in movies %}
+              <div class="col-md-4 my-3">
+                  <div class="card">
+                      <img class="card-img-top" src="../static/images/{{movie.postor}}" alt="Card image cap">
+                      <div class="card-body">
+                      <h5 class="card-title">{{ movie.title }}</h5>
+                      <a href="{{ url_for('cinema', id=movie.id) }}" class="btn btn-info">View Details</a>
+                      </div>
+                  </div>
+              </div>
+          {% endfor %}
+      </div>
+
+    </div>
+      
+</body>
+</html>
