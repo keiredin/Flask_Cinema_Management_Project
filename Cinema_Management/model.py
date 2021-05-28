@@ -1,10 +1,15 @@
 from datetime import datetime
 from enum import unique
-from Cinema_Management import db,bcrypt #login_manager,
+from Cinema_Management import db,login_manager
 from flask_login import UserMixin
 
 
-class Client(db.Model):
+@login_manager.user_loader
+def load_user(id):
+    return Client.query.get(id)
+
+
+class Client(db.Model, UserMixin):
     __tablename__ = "client"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -12,6 +17,8 @@ class Client(db.Model):
     email = db.Column(db.String(30), nullable=False, unique=True)
     password = db.Column(db.String(100), nullable=False)
     image = db.Column(db.String(100), default='user.png')
+    twitter_link = db.Column(db.String(40))
+    instagram_link = db.Column(db.String(40))
 
     def __repr__(self):
         return f"Client('{self.username}', '{self.email}', '{self.image}')"
@@ -40,6 +47,7 @@ class Comment(db.Model):
     client_id = db.Column(db.Integer, db.ForeignKey('client.id'),nullable=False )
     movie_id = db.Column(db.Integer , db.ForeignKey('movies.id'), nullable=False )
     comment = db.Column(db.String(), nullable=False)
+    date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
     def __repr__(self):
         return f"Comment('{self.comment}')"

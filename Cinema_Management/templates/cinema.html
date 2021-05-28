@@ -103,13 +103,23 @@
           class="commentsNum">(0) Comments</span></h1>
       <i class="d-block w-100 bottomBorder"></i>
       <div class="container-fluid comments">
+        {% for comment in comments %}
+          <div class="media my-4">
+            <img class="align-self-start rounded-circle mr-3" style="max-width: 64px;" src="https://st3.depositphotos.com/13159112/17145/v/600/depositphotos_171453724-stock-illustration-default-avatar-profile-icon-grey.jpg" alt="User">
+            <div class="media-body pl-3 leftBorder">
+              <h5 class="mt-0 text-white">{{comment.comment}}</h5>
+              
+            </div>
+            <div class="text-muted d-inline cstext">{{comment._date}}</div>
+          </div>
+        {% endfor %}
       </div>
       <div class="container-fluid my-4">
         <h1 class="h5 text-white"> <i class="fa fa-comments" style="color: #0047ab;"></i> Leave a comment</h1>
-        <form id="comment">
-          <textarea class="form-control commentArea my-2" placeholder="Your comment..." rows="7" required>
+        <form method="POST" id="comment">
+          <textarea name='commentArea' class="form-control commentArea my-2" placeholder="Your comment..." rows="7" required>
           </textarea>
-          <button class="btn btn-dark mb-2 commentSubmit" type="submit">Post Comment</button>
+          <button name="commentSubmit" class="btn btn-dark mb-2 commentSubmit" type="submit">Post Comment</button>
         </form>
       </div>
     </div>
