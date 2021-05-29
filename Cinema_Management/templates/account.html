@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block otherstyle %}
-   <link rel="stylesheet"  type="text/css" href="{{ url_for('static', filename='css/account.css') }}" >
+   
 {% endblock %}
 
 {% block navbar %}
@@ -9,6 +9,22 @@
 
 {% block content %}
     <div class="container light-style flex-grow-1 py-5">
+        <main role="main" class="container">
+            <div class="row">
+              <div class="col-md-12">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                  {% if messages %}
+                    {% for category, message in messages %}
+                      <div class="alert alert-{{ category }}">
+                        {{ message }}
+                      </div>
+                    {% endfor %}
+                  {% endif %}
+                {% endwith %}
+              </div>
+        
+            </div>
+        </main>
 
         <h4 class="font-weight-bold py-3 mb-4">
         Personal Data
@@ -29,137 +45,106 @@
                 <div class="tab-content">
                     <div class="tab-pane fade active show" id="account-general">
                     <div class="card-body">
-                    <form method="POST" action=""  id="Gform">
+                    <form method="POST" action="./{{current_user.id}}"  id="Gform">
                         <div class="form-group">
-                        <label class="form-label">E-mail</label>
-                        <input type="email" name="currentEmail" class="form-control mb-1 inputType oldEmail" placeholder="example@example.com" disabled>
+                            <label class="form-label">E-mail</label>
+                            <input type="email" name="currentEmail" class="form-control mb-1 inputType oldEmail" placeholder="example@example.com" disabled>
                         </div>
                         <div class="form-group">
-                        <label class="form-label">Phone Number</label>
-                        <input type="text" name="phoneNumber" class="form-control inputType phoneNumber">
+                            <label class="form-label">Phone Number {{current_user.id}}</label>
+                            <input type="text" name="phoneNumber" class="form-control inputType phoneNumber">
                         </div>
                         <div class="form-group">
-                        <label class="form-label">Change Email</label>
-                        <input type="email" name="newEmail" class="form-control inputType mb-1 newEmail">
+                            <label class="form-label">Change Email</label>
+                            <input type="email" name="newEmail" class="form-control inputType mb-1 newEmail">
                         </div>
-                        <button type="submit" name='changeEmail' class="btn btn-primary svbutton saveChangeG">Save changes</button>&nbsp;
-                        <!-- <button type="button" class="btn btn-default cnacelG" >Cancel</button> -->
+                        <div class="form-group">
+                            <button type="submit" name='changeEmail' class="btn btn-primary " value="Change Email">Change Email</button>&nbsp;
+                        </div>
+                        
                     </form>
                     </div>
                 </div>
                 
                 <div class="tab-pane fade" id="account-change-password">
                 <div class="card-body pb-2">
-                    <form action="" id="passwordChangeForm">
-                    <div class="form-group">
-                        <label class="form-label">Current password</label>
-                        <input type="password" name="currentPassword" required class="form-control inputType currentPsw">
-                    </div>
+                    <form method="POST" action="./{{current_user.id}}" id="passwordChangeForm">
+                        <div class="form-group">
+                            <label class="form-label">Current password</label>
+                            <input type="password" name="currentPassword" required class="form-control inputType">
+                        </div>
     
-                    <div class="form-group">
-                        <label class="form-label">New password</label>
-                        <input type="password" name="newPassword"  required  class="form-control inputType newPsw">
-                    </div>
-    
-                    <div class="form-group">
-                        <label class="form-label">Confirm new password</label>
-                        <input type="password" name="confirmPassword" required class="form-control inputType cfrmPsw">
-                    </div>
-                    <button type="submit" name='changePassword' class="btn btn-primary svbutton saveChangeC">Save changes</button>&nbsp;
+                        <div class="form-group">
+                            <label class="form-label">New password</label>
+                            <input type="password" name="newPassword"  required  class="form-control inputType">
+                        </div>
+        
+                        <div class="form-group">
+                            <label class="form-label">Confirm new password</label>
+                            <input type="password" name="confirmPassword" required class="form-control inputType">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" name='changePassword' class="btn btn-primary " value="Change Password">Change Password</button>&nbsp;
+                        </div>
+                        
                     </form>
 
 
                 </div>
-                </div>
+            </div>
                 
-                <div class="tab-pane fade" id="account-social-links">
+            <div class="tab-pane fade" id="account-social-links">
                 <div class="card-body pb-2">
-                    <form action="" id="socialsForm">
-                    <div class="form-group">
-                        <label class="form-label">Twitter</label>
-                        <input type="text" name="twitter" class="form-control inputType twitterInput" value="https://twitter.com/user">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Instagram</label>
-                        <input type="text" name="instagram" class="form-control inputType instaInput" value="https://www.instagram.com/user">
-                    </div>
-                    <!-- <div class="form-group">
-                        <label class="form-label">Google+</label>
-                        <input type="text" class="form-control inputType" value="">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">LinkedIn</label>
-                        <input type="text" class="form-control inputType" value="">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Instagram</label>
-                        <input type="text" class="form-control inputType" value="https://www.instagram.com/user">
-                    </div> -->
-                    <button type="submit" name='changeSocialLinks' class="btn btn-primary svbutton saveChange ">Save changes</button>&nbsp;
-                    <!-- <button type="button" class="btn btn-default cnacel" >Cancel</button> -->
+                    <form method="POST" action="./{{current_user.id}}" id="socialsForm">
+                        <div class="form-group">
+                            <label class="form-label">Twitter</label>
+                            <input type="text" name="twitter" class="form-control inputType" value="https://twitter.com/user">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Instagram</label>
+                            <input type="text" name="instagram" class="form-control inputType" value="https://www.instagram.com/user">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" name='changeSocialLinks' class="btn btn-primary " value="Save changes">Save changes</button>&nbsp;
+                        </div>
+                        
+                        
                     </form>
-
-
                 </div>
-                </div>
-                <div class="tab-pane fade" id="account-setting">
-                    <div class="card-body pb-2 ">
-                        <h3>Personal Data</h3>
-                        <section>
+            </div>
+
+            <div class="tab-pane fade" id="account-setting">
+                <div class="card-body pb-2 ">
+                    <h3>Personal Data</h3>
+                    <section>
                         <p>Your account contains personal data that you have given us. This page allows you to delete that data.</p>
                         <h6><b>Deleting this data will permanently remove your account, and this can not be recovered.</b></h6>
                         <button name="deleteAccount" class="btn btn-danger deleteAcc">Delete</button>
-                        </section>
-                        
-        
-                    </div>
-                </div>
-                
-                <div class="tab-pane fade" id="account-notifications">
-                <div class="card-body pb-2">
-
-                <h6 class="mb-4">Application</h6>
-                <form id="preferncesForm">
-                        <div class="form-group">
-                        <label class="switcher">
-                            <input type="checkbox" class="switcher-input newsLetterCheckbox" checked="">
-                            <span class="switcher-indicator">
-                            <span class="switcher-yes"></span>
-                            <span class="switcher-no"></span>
-                            </span>
-                            <span class="switcher-label">Our Newsletter</span>
-                        </label>
-                        </div>
-                        <!-- <div class="form-group">
-                        <label class="switcher">
-                            <input type="checkbox" class="switcher-input">
-                            <span class="switcher-indicator">
-                            <span class="switcher-yes"></span>
-                            <span class="switcher-no"></span>
-                            </span>
-                            <span class="switcher-label">Weekly product updates</span>
-                        </label>
-                        </div>
-                        <div class="form-group">
-                        <label class="switcher">
-                            <input type="checkbox" class="switcher-input" checked="">
-                            <span class="switcher-indicator">
-                            <span class="switcher-yes"></span>
-                            <span class="switcher-no"></span>
-                            </span>
-                            <span class="switcher-label">Weekly blog digest</span>
-                        </label>
-                        </div> -->
-                        <button type="submit" class="btn btn-primary svbutton saveChange">Save changes</button>&nbsp;
-                    </form>
-                </div>
-            </div>
-            </div>
-        </div>
-        </div>
-        </div>
+                    </section>
+                    
     
+                </div>
+            </div>
+                
+            
+        </div>
+        
+    </div>
+
+
 {% endblock content %}
 
 {% block footer %}
+{% endblock %}
+
+{% block otherjs %}
+    <!--Jquery Cdn -->
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(document).on('submit',function(e)
+                    {
+        e.preventDefault();
+        
+        });
+    </script> -->
 {% endblock %}

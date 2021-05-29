@@ -1,7 +1,7 @@
 
 from flask import render_template, url_for, flash, redirect,request
 from flask_login.utils import confirm_login
-from Cinema_Management import app,db,bcrypt
+from Cinema_Management import app,db,bcrypt,login_manager
 from flask_login import login_user, logout_user, current_user, login_required
 from Cinema_Management.model import Client, Comment, Movie
 from Cinema_Management.forms import LoginForm, RegistrationForm
@@ -13,6 +13,11 @@ admin = Admin(app)
 admin.add_view(ModelView(Client, db.session))
 admin.add_view(ModelView(Movie, db.session))
 admin.add_view(ModelView(Comment, db.session))
+
+@login_manager.user_loader
+def load_user(id):
+    return Client.query.get(int(id))
+
 
 @app.route("/")
 @app.route("/index")
@@ -79,53 +84,52 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
-@login_required
-@app.route("/account")
-def account():
+
+@app.route("/account/<int:id>" , methods=['GET','POST'])
+def account(id):
     if request.method == 'POST':
-        user = Client.query.filter_by(id=current_user.id).first()
-        if request.form.get('changeEmail'):
-            current_email = user.email
-            new_email = request.form.get('newEmail')
-            if new_email == current_email:
-                flash('New email cannot be the same as the old one', 'danger')
-                return redirect(url_for('account'))
-            else:
-                user.email=new_email
-                db.session.commit()
-                flash('Email changed successfully', 'success')
+        user = Client.query.get_or_404(id)
+        if request.form.get("changeEmail"):
+            return "email"
+            # current_email = user.email
+            # new_email = request.form.get('newEmail')
+            # if new_email == current_email:
+            #     flash('New email cannot be the same as the old one', 'danger')
+            # else:
+            #     user.email=new_email
+            #     try:
+            #         db.session.commit()
+            #         flash('Email changed successfully', 'success')
+            #         return redirect(url_for('index'))
+            #     except:
+            #         return "There was a problem on updating!"
+        
         elif(request.form.get('changePassword')):
-            current_password = user.password
-            new_password = request.form.get('newPassword')
-            confirm_password = request.form.get('confirmPassword')
-            if(new_password != confirm_password):
-                flash('Password and confirm password do not match!', 'danger')
-                return
-            else:
-                user.password=current_password
-                db.session.commit()
-                flash('Password changed successfully', 'success')
-                return redirect(url_for('account'))
+            return "password"
+            # new_password = request.form.get('newPassword')
+            # confirm_password = request.form.get('confirmPassword')
+            # if(new_password != confirm_password):
+            #     flash('Password and confirm password do not match!', 'danger')
+            # else:
+            #     hashed_password = bcrypt.generate_password_hash(new_password).decode('utf-8')
+            #     user.password=hashed_password
+            #     db.session.commit()
+            #     flash('Password changed successfully', 'success')
+            #     return redirect(url_for('login'))
         elif(request.form.get('changeSocialLinks')):
-            twitter = request.form.get('twitter')
-            instagram = request.form.get('instagram')
-            user.twitter_link = twitter
-            user.instagram_link = instagram
-            db.session.commit()
-            flash('Social media link added successfully', 'success')
-            redirect(url_for('index'))
+            return "Socialm"
+            # twitter = request.form.get('twitter')
+            # instagram = request.form.get('instagram')
+            # user.twitter_link = twitter
+            # user.instagram_link = instagram
+            # db.session.commit()
+            # flash('Social media link added successfully', 'success')
+            # redirect(url_for('index'))
         else:
-            return
-        
-
-        
-
-        
-
-
-            
-
-    return render_template('account.html', title='Account')
+            return "else"
+            # return redirect(url_for('account',id=current_user.id))
+    else:
+        return render_template('account.html', title='Account')
 
 @app.route("/cinema/<int:id>")
 def cinema(id):

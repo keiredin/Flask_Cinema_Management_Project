@@ -8,17 +8,17 @@ $(document).ready(function () {
    //    title: 'Signed in successfully'
    //  })
    //#region LoadInTheUserProfileInTheNavBar
-   let user = readLoginCookie();
-   if(user){
-      loginRegister.style.display="none";
-      profileDropdown.style.display="block";
-      emailID.textContent = user;
-   }
-   else{
-      loginRegister.style.display="block";
-      profileDropdown.style.display="none";
-   }
-   //#endregion
+   // let user = readLoginCookie();
+   // if(user){
+   //    loginRegister.style.display="none";
+   //    profileDropdown.style.display="block";
+   //    emailID.textContent = user;
+   // }
+   // else{
+   //    loginRegister.style.display="block";
+   //    profileDropdown.style.display="none";
+   // }
+   // //#endregion
 
    var i, stop;
       i = 1;
@@ -41,15 +41,16 @@ $(document).ready(function () {
 $('.navTrigger').click(function () {
    $(this).toggleClass('active');
 });
-   //#region Logout
-   const logOutButton = document.querySelector('.logoutUser');
-   logOutButton.addEventListener("click",logOutUser);
-   async function logOutUser(){
-   eraseLoginCookie();
-   // location.reload();
-   window.location.href = 'Login.html';
-   }
-   //#endregion
+
+   // //#region Logout
+   // const logOutButton = document.querySelector('.logoutUser');
+   // logOutButton.addEventListener("click",logOutUser);
+   // async function logOutUser(){
+   // eraseLoginCookie();
+   // // location.reload();
+   // window.location.href = 'Login.html';
+   // }
+   // //#endregion
 
 
 //   document.querySelector(".navTrigger").addEventListener("click", (e) =>{
