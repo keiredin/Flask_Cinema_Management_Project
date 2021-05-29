@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 
 {% block otherstyle %}
+    <link rel="stylesheet"  type="text/css" href="{{ url_for('static', filename='css/account.css') }}" >
    
 {% endblock %}
 
@@ -9,22 +10,7 @@
 
 {% block content %}
     <div class="container light-style flex-grow-1 py-5">
-        <main role="main" class="container">
-            <div class="row">
-              <div class="col-md-12">
-                {% with messages = get_flashed_messages(with_categories=true) %}
-                  {% if messages %}
-                    {% for category, message in messages %}
-                      <div class="alert alert-{{ category }}">
-                        {{ message }}
-                      </div>
-                    {% endfor %}
-                  {% endif %}
-                {% endwith %}
-              </div>
         
-            </div>
-        </main>
 
         <h4 class="font-weight-bold py-3 mb-4">
         Personal Data
@@ -48,7 +34,7 @@
                     <form method="POST" action="./{{current_user.id}}"  id="Gform">
                         <div class="form-group">
                             <label class="form-label">E-mail</label>
-                            <input type="email" name="currentEmail" class="form-control mb-1 inputType oldEmail" placeholder="example@example.com" disabled>
+                            <input type="email" name="currentEmail" class="form-control mb-1 inputType oldEmail" placeholder="{{current_user.email}}" disabled>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Phone Number {{current_user.id}}</label>
@@ -119,16 +105,77 @@
                     <section>
                         <p>Your account contains personal data that you have given us. This page allows you to delete that data.</p>
                         <h6><b>Deleting this data will permanently remove your account, and this can not be recovered.</b></h6>
-                        <button name="deleteAccount" class="btn btn-danger deleteAcc">Delete</button>
+                        <button  type="button" class="btn btn-danger "data-toggle="modal" data-target="#deleteModal">Delete</button>
                     </section>
+                    <!-- name="deleteAccount" value="delete" -->
                     
     
                 </div>
             </div>
+            <div class="tab-pane fade" id="account-notifications">
+                <div class="card-body pb-2">
+  
+              <h6 class="mb-4">Application</h6>
+              <form method="POST" action="./{{current_user.id}}" id="preferncesForm">
+                      <div class="form-group">
+                        <label class="switcher">
+                          <input type="checkbox" name="newsLetterCheckbox" value="1" >
+                          <span class="switcher-indicator">
+                            <span class="switcher-yes"></span>
+                            <span class="switcher-no"></span>
+                          </span>
+                          <span class="switcher-label">Our Newsletter</span>
+                        </label>
+                      </div>
+                      <!-- <div class="form-group">
+                        <label class="switcher">
+                          <input type="checkbox" class="switcher-input">
+                          <span class="switcher-indicator">
+                            <span class="switcher-yes"></span>
+                            <span class="switcher-no"></span>
+                          </span>
+                          <span class="switcher-label">Weekly product updates</span>
+                        </label>
+                      </div>
+                      <div class="form-group">
+                        <label class="switcher">
+                          <input type="checkbox" class="switcher-input" checked="">
+                          <span class="switcher-indicator">
+                            <span class="switcher-yes"></span>
+                            <span class="switcher-no"></span>
+                          </span>
+                          <span class="switcher-label">Weekly blog digest</span>
+                        </label>
+                      </div> -->
+                      <button type="submit" name="subscribe" value="Save changes" class="btn btn-primary svbutton saveChange">Save changes</button>&nbsp;
+                  </form>
                 
             
         </div>
         
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Are you sure?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>This will permanently remove your account!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">cancel</button>
+                    <form method="POST" action="">
+                        <input type="submit" name="deleteAcc" value="delete" class="btn btn-danger">
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
 

@@ -87,41 +87,66 @@ def account(id):
     if request.method == 'POST':
         user = Client.query.get_or_404(id)
         if request.form.get("changeEmail"):
-            return "email"
-            # current_email = user.email
-            # new_email = request.form.get('newEmail')
-            # if new_email == current_email:
-            #     flash('New email cannot be the same as the old one', 'danger')
-            # else:
-            #     user.email=new_email
-            #     try:
-            #         db.session.commit()
-            #         flash('Email changed successfully', 'success')
-            #         return redirect(url_for('index'))
-            #     except:
-            #         return "There was a problem on updating!"
+            current_email = user.email
+            new_email = request.form.get('newEmail')
+            if new_email == current_email:
+                flash('New email cannot be the same as the old one', 'danger')
+                return redirect(url_for('account',id=current_user.id))
+            else:
+                user.email=new_email
+                try:
+                    db.session.commit()
+                    flash('Email changed successfully', 'success')
+                    return redirect(url_for('logout'))
+                except:
+                    return "There was a problem on updating!"
         
         elif(request.form.get('changePassword')):
-            return "password"
-            # new_password = request.form.get('newPassword')
-            # confirm_password = request.form.get('confirmPassword')
-            # if(new_password != confirm_password):
-            #     flash('Password and confirm password do not match!', 'danger')
-            # else:
-            #     hashed_password = bcrypt.generate_password_hash(new_password).decode('utf-8')
-            #     user.password=hashed_password
-            #     db.session.commit()
-            #     flash('Password changed successfully', 'success')
-            #     return redirect(url_for('login'))
+            
+            new_password = request.form.get('newPassword')
+            confirm_password = request.form.get('confirmPassword')
+            if(new_password != confirm_password):
+                flash('Password and confirm password do not match!', 'danger')
+                return redirect(url_for('account',id=current_user.id))
+            else:
+                hashed_password = bcrypt.generate_password_hash(new_password).decode('utf-8')
+                user.password=hashed_password
+                try:
+                    db.session.commit()
+                    flash('Password changed successfully', 'success')
+                    return redirect(url_for('account',id=current_user.id))
+                except:
+                    return "There was a problem on updating!"
+        
         elif(request.form.get('changeSocialLinks')):
-            return "Socialm"
-            # twitter = request.form.get('twitter')
-            # instagram = request.form.get('instagram')
-            # user.twitter_link = twitter
-            # user.instagram_link = instagram
-            # db.session.commit()
-            # flash('Social media link added successfully', 'success')
-            # redirect(url_for('index'))
+            
+            twitter = request.form.get('twitter')
+            instagram = request.form.get('instagram')
+            user.twitter_link = twitter
+            user.instagram_link = instagram
+            try:
+                db.session.commit()
+                flash('Social media link added successfully', 'success')
+                return redirect(url_for('index'))
+            except:
+                return "There was a problem on updating!"
+        elif(request.form.get('subscribe')):
+            checkbox_value = request.form.get('newsLetterCheckbox')
+            # if checkbox_value:
+            flash('Changes were successfull', 'success')
+            return redirect(url_for('account',id=current_user.id))
+                
+            # else:
+            #     return "null"
+        elif(request.form.get('deleteAcc')):
+            try:
+                db.session.delete(user)
+                db.session.commit()
+                flash('your account has been deleted!','success')
+                return redirect(url_for('logout'))
+            except:
+                return "There was a problem on updating!"
+
         else:
             return "else"
             # return redirect(url_for('account',id=current_user.id))
@@ -129,6 +154,7 @@ def account(id):
         return render_template('account.html', title='Account')
 
 @app.route("/cinema/<int:id>")
+@login_required
 def cinema(id):
     movie = Movie.query.filter_by(id=id).first()
     if request.method =='POST':
@@ -154,5 +180,6 @@ def movies():
         else:
             flash('Type some title!', 'danger')
     return render_template('movies.html', movies=Movies)
+
 if __name__ == '__main__':
     app.run(debug=True)
