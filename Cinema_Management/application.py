@@ -74,11 +74,8 @@ def login():
                 return redirect(next_page) if next_page else redirect(url_for('index'))
             else:
                 flash('Login Unsuccessful. Please check email and password', 'danger')
-
-        
     return render_template('login.html')
     
-
 @app.route("/logout")
 def logout():
     logout_user()
@@ -142,11 +139,20 @@ def cinema(id):
     comments = Comment.query.all()
     return render_template('cinema.html', title=movie.title, movie=movie, comments=comments)
 
-
 @app.errorhandler(404)
 def not_found_error(error):
     return render_template('404.html'),404
 
-
+@app.route('/movies', methods=['GET', 'POST'])
+def movies():
+    Movies = Movie.query.all()
+    if request.method == 'POST':
+        search = request.form.get('search')
+        if search:
+            movieSearch = Movie.query.filter(Movie.title.ilike(r"%{}%".format(search))).all()
+            return render_template('movies.html', movieSearch=movieSearch)
+        else:
+            flash('Type some title!', 'danger')
+    return render_template('movies.html', movies=Movies)
 if __name__ == '__main__':
     app.run(debug=True)
