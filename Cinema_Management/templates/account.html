@@ -31,21 +31,34 @@
                 <div class="tab-content">
                     <div class="tab-pane fade active show" id="account-general">
                     <div class="card-body">
-                    <form method="POST" action="./{{current_user.id}}"  id="Gform">
+                    <form method="POST" action=""  id="Gform">
+                        {{ formE.hidden_tag() }}
+                        
                         <div class="form-group">
-                            <label class="form-label">E-mail</label>
+                            <label class="form-label">Current Email</label>
                             <input type="email" name="currentEmail" class="form-control mb-1 inputType oldEmail" placeholder="{{current_user.email}}" disabled>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Phone Number {{current_user.id}}</label>
+                            <label class="form-label">Phone Number</label>
                             <input type="text" name="phoneNumber" class="form-control inputType phoneNumber">
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Change Email</label>
-                            <input type="email" name="newEmail" class="form-control inputType mb-1 newEmail">
+                            {{ formE.new_email.label(class="form-control-label") }}
+                            {% if formE.new_email.errors %}
+                                {{ formE.new_email(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.new_email.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ formE.new_email(class="form-control form-control-lg") }}
+                            {% endif %}
+                            
                         </div>
                         <div class="form-group">
-                            <button type="submit" name='changeEmail' class="btn btn-primary " value="Change Email">Change Email</button>&nbsp;
+                            {{ formE.submit(class="btn btn-primary") }}
+                            &nbsp;
                         </div>
                         
                     </form>
@@ -54,23 +67,43 @@
                 
                 <div class="tab-pane fade" id="account-change-password">
                 <div class="card-body pb-2">
-                    <form method="POST" action="./{{current_user.id}}" id="passwordChangeForm">
+                    <form method="POST" action="" id="passwordChangeForm">
+                        {{ formP.hidden_tag() }}
+
                         <div class="form-group">
-                            <label class="form-label">Current password</label>
+                            <label class="form-label">Current Password</label>
                             <input type="password" name="currentPassword" required class="form-control inputType">
                         </div>
     
                         <div class="form-group">
-                            <label class="form-label">New password</label>
-                            <input type="password" name="newPassword"  required  class="form-control inputType">
+                            {{ formP.new_password.label(class="form-control-label") }}
+                            {% if formP.new_password.errors %}
+                                {{ formP.new_password(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.new_password.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ formP.new_password(class="form-control form-control-lg") }}
+                            {% endif %}
                         </div>
         
                         <div class="form-group">
-                            <label class="form-label">Confirm new password</label>
-                            <input type="password" name="confirmPassword" required class="form-control inputType">
+                            {{ formP.confirm_password.label(class="form-control-label") }}
+                            {% if formP.confirm_password.errors %}
+                                {{ formP.confirm_password(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.confirm_password.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ formP.confirm_password(class="form-control form-control-lg") }}
+                            {% endif %}
                         </div>
                         <div class="form-group">
-                            <button type="submit" name='changePassword' class="btn btn-primary " value="Change Password">Change Password</button>&nbsp;
+                            {{ formP.submit(class="btn btn-primary") }}&nbsp;
                         </div>
                         
                     </form>
@@ -81,14 +114,34 @@
                 
             <div class="tab-pane fade" id="account-social-links">
                 <div class="card-body pb-2">
-                    <form method="POST" action="./{{current_user.id}}" id="socialsForm">
+                    <form method="POST" action="" id="socialsForm">
                         <div class="form-group">
-                            <label class="form-label">Twitter</label>
-                            <input type="text" name="twitter" class="form-control inputType" value="https://twitter.com/user">
+                            {{ formS.twitter.label(class="form-control-label") }}
+                            {% if formS.twitter.errors %}
+                                {{ formS.twitter(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.twitter.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ formS.twitter(class="form-control form-control-lg",value="https://twitter.com/user") }}
+                            {% endif %}
+                            
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Instagram</label>
-                            <input type="text" name="instagram" class="form-control inputType" value="https://www.instagram.com/user">
+                            {{ formS.instagram.label(class="form-control-label") }}
+                            {% if formS.instagram.errors %}
+                                {{ formS.instagram(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.instagram.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ formS.instagram(class="form-control form-control-lg",value="https://www.instagram.com/user") }}
+                            {% endif %}
+                            
                         </div>
                         <div class="form-group">
                             <button type="submit" name='changeSocialLinks' class="btn btn-primary " value="Save changes">Save changes</button>&nbsp;
@@ -116,7 +169,7 @@
                 <div class="card-body pb-2">
   
               <h6 class="mb-4">Application</h6>
-              <form method="POST" action="./{{current_user.id}}" id="preferncesForm">
+              <form method="POST" action="" id="preferncesForm">
                       <div class="form-group">
                         <label class="switcher">
                           <input type="checkbox" name="newsLetterCheckbox" value="1" >

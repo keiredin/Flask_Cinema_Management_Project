@@ -35,3 +35,31 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     remember = BooleanField('Remember Me')
     submit = SubmitField('Login')
+
+
+class ChangeEmailForm(FlaskForm):
+    
+    new_email = StringField('New Email',
+                        validators=[DataRequired(), Email()])
+    submit = SubmitField('Change Email')
+
+
+    def validate_email(self, new_email):
+        user = Client.query.filter_by(email=new_email.data).first()
+        if user:
+            raise ValidationError('That email is already exist!')
+
+class ChangePasswordForm(FlaskForm):
+    
+    new_password = PasswordField('New Password', validators=[DataRequired()])
+    confirm_password = PasswordField('Confirm Password',
+                                     validators=[DataRequired(), EqualTo('new_password')])
+    submit = SubmitField('Change Password')
+
+class SocialLinkForm(FlaskForm):
+    twitter = StringField('Twitter',
+                           validators=[DataRequired(), Length(min=15, max=40)])
+    instagram = StringField('Instagram',
+                           validators=[DataRequired(), Length(min=15, max=40)])
+    # facebook = StringField('Facebook',
+    #                        validators=[DataRequired(), Length(min=15, max=40)])

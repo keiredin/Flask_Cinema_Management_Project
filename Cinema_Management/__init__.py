@@ -2,6 +2,11 @@ from flask import Flask
 from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from flask_admin import Admin
+from flask_admin.contrib.sqla import ModelView
+
+
+
 
 
 #heroku pg:psql -a books-review-heroku
@@ -24,6 +29,14 @@ login_manager.login_view = 'login'
 login_manager.login_message_category = 'info'
 
 
-from Cinema_Management.model import Client
+from Cinema_Management.model import Client , Movie , Comment
+
+admin = Admin(app)
+admin.add_view(ModelView(Client, db.session))
+admin.add_view(ModelView(Movie, db.session))
+admin.add_view(ModelView(Comment, db.session))
+
+
+
 from Cinema_Management import application
 

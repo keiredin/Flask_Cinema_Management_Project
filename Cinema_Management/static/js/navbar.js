@@ -1,13 +1,13 @@
-const profileDropdown = document.querySelector('.userProfile');
-const loginRegister = document.querySelector('.loginRegister');
-const emailID = document.querySelector('.emailID');
+// const profileDropdown = document.querySelector('.userProfile');
+// const loginRegister = document.querySelector('.loginRegister');
+// const emailID = document.querySelector('.emailID');
 $(document).ready(function () {
     
    //  Toast.fire({
    //    icon: 'success',
    //    title: 'Signed in successfully'
    //  })
-   //#region LoadInTheUserProfileInTheNavBar
+   // //#region LoadInTheUserProfileInTheNavBar
    // let user = readLoginCookie();
    // if(user){
    //    loginRegister.style.display="none";
@@ -29,7 +29,14 @@ $(document).ready(function () {
         }
         $('#len'+(i++)).toggleClass('bounce');
       }, 500)
-      
+      // $(window).scroll(function () {
+      //    if ($(window).scrollTop() < 50) {
+      //       $('.navbar').css('background','transparent');
+      //    } else {
+      //       $('.navbar').css('background','red');
+         
+      //    }
+      //    });
    $(window).scroll(function () {
       if ($(this).scrollTop() < 70) {
          $(".navbar").removeClass("navbarNotSoFat");
@@ -41,7 +48,6 @@ $(document).ready(function () {
 $('.navTrigger').click(function () {
    $(this).toggleClass('active');
 });
-
    // //#region Logout
    // const logOutButton = document.querySelector('.logoutUser');
    // logOutButton.addEventListener("click",logOutUser);

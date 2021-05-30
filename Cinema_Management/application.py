@@ -1,18 +1,11 @@
 
 from flask import render_template, url_for, flash, redirect,request
 from flask_login.utils import confirm_login
-from Cinema_Management import app,db,bcrypt,login_manager
+from flask_wtf import form
+from Cinema_Management import app,db,bcrypt,login_manager,admin
 from flask_login import login_user, logout_user, current_user, login_required
 from Cinema_Management.model import Client, Comment, Movie
-from Cinema_Management.forms import LoginForm, RegistrationForm
-from flask_admin import Admin
-from flask_admin.contrib.sqla import ModelView
-
-
-admin = Admin(app)
-admin.add_view(ModelView(Client, db.session))
-admin.add_view(ModelView(Movie, db.session))
-admin.add_view(ModelView(Comment, db.session))
+from Cinema_Management.forms import LoginForm, RegistrationForm, ChangeEmailForm, ChangePasswordForm ,SocialLinkForm
 
 @login_manager.user_loader
 def load_user(id):
@@ -39,89 +32,81 @@ def contact():
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
-    # form = RegistrationForm()
+
+    form= LoginForm()
+    form2 = RegistrationForm()
+ 
     if request.method == 'POST':
 
         # signUp block   
-        if request.form.get("signup"):
-            error = ""
-            username = request.form.get("userName")
-            email = request.form.get("userEmail")
-            password = request.form.get("userPassword") 
-            confPassword = request.form.get("userCP")
-            hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
-            if((username is None) or (password is None) or (email is None) or (confPassword is None)):
-                error = "Something is missing!"
-            elif(Client.query.filter_by(email=email).first() is not None):
-                error = "Email is already taken!"
+        if form2.validate_on_submit():
             
-            else:
-                user = Client(username=username, email=email, password=hashed_password)
-                db.session.add(user)
-                db.session.commit()
-                flash('Your account has been created! You are now able to log in', 'success')
-                return redirect(url_for('login'))
-            flash(error, 'danger')
-            return render_template('login.html')
+            username = form2.username.data
+            email = form2.email.data
+            password = form2.password.data
+            confPassword = form2.confirm_password.data
+            hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+            
+            user = Client(username=username, email=email, password=hashed_password)
+            db.session.add(user)
+            db.session.commit()
+            flash('Your account has been created! You are now able to log in', 'success')
+            return redirect(url_for('login'))
+            
         
         # login(signin) area
-        if request.form.get("login"):
-            user = Client.query.filter_by(email=request.form['userEmailLog']).first()
-            if user and bcrypt.check_password_hash(user.password, request.form.get('userPasswordLog')):
+        if form.validate_on_submit():
+            user = Client.query.filter_by(email=form.email.data).first()
+            if user and bcrypt.check_password_hash(user.password, form.password.data):
                 login_user(user)
                 next_page = request.args.get('next')
                 # return redirect(url_for('index'))
                 return redirect(next_page) if next_page else redirect(url_for('index'))
             else:
                 flash('Login Unsuccessful. Please check email and password', 'danger')
-    return render_template('login.html')
-    
-@app.route("/logout")
-def logout():
-    logout_user()
-    return redirect(url_for('index'))
+    return render_template('login.html', title='Login', form=form, form2=form2)
 
 
-@app.route("/account/<int:id>" , methods=['GET','POST'])
-def account(id):
+
+@app.route("/account/" , methods=['GET','POST'])
+def account():
+    formE = ChangeEmailForm()
+    formP = ChangePasswordForm()
+    formS = SocialLinkForm()
+    id = current_user.id;
     if request.method == 'POST':
         user = Client.query.get_or_404(id)
-        if request.form.get("changeEmail"):
+        if formE.validate_on_submit():
             current_email = user.email
-            new_email = request.form.get('newEmail')
-            if new_email == current_email:
-                flash('New email cannot be the same as the old one', 'danger')
-                return redirect(url_for('account',id=current_user.id))
-            else:
-                user.email=new_email
-                try:
-                    db.session.commit()
-                    flash('Email changed successfully', 'success')
-                    return redirect(url_for('logout'))
-                except:
-                    return "There was a problem on updating!"
+            new_email = formE.new_email.data
+            # if new_email == current_email:
+            #     flash('New email cannot be the same as the old one', 'danger')
+            #     return redirect(url_for('account'))
+            # else:
+            user.email=new_email
+            try:
+                db.session.commit()
+                flash('Email changed successfully', 'success')
+                return redirect(url_for('logout'))
+            except:
+                return "There was a problem on updating!"
         
-        elif(request.form.get('changePassword')):
+        elif(formP.validate_on_submit()):
             
-            new_password = request.form.get('newPassword')
-            confirm_password = request.form.get('confirmPassword')
-            if(new_password != confirm_password):
-                flash('Password and confirm password do not match!', 'danger')
-                return redirect(url_for('account',id=current_user.id))
-            else:
-                hashed_password = bcrypt.generate_password_hash(new_password).decode('utf-8')
-                user.password=hashed_password
-                try:
-                    db.session.commit()
-                    flash('Password changed successfully', 'success')
-                    return redirect(url_for('account',id=current_user.id))
-                except:
-                    return "There was a problem on updating!"
+            new_password = formP.new_password.data
+            hashed_password = bcrypt.generate_password_hash(new_password).decode('utf-8')
+            user.password = hashed_password
+            try:
+                db.session.commit()
+                flash('Password changed successfully', 'success')
+                return redirect(url_for('account'))
+            except:
+                return "There was a problem on updating!"
         
-        elif(request.form.get('changeSocialLinks')):
+        elif(formS.validate_on_submit()):
             
-            twitter = request.form.get('twitter')
-            instagram = request.form.get('instagram')
+            twitter = formS.twitter.data
+            instagram = formS.instagram.data
             user.twitter_link = twitter
             user.instagram_link = instagram
             try:
@@ -134,7 +119,7 @@ def account(id):
             checkbox_value = request.form.get('newsLetterCheckbox')
             # if checkbox_value:
             flash('Changes were successfull', 'success')
-            return redirect(url_for('account',id=current_user.id))
+            return redirect(url_for('account'))
                 
             # else:
             #     return "null"
@@ -148,10 +133,11 @@ def account(id):
                 return "There was a problem on updating!"
 
         else:
+            print(current_user.id)
             return "else"
-            # return redirect(url_for('account',id=current_user.id))
-    else:
-        return render_template('account.html', title='Account')
+            # return redirect(url_for('account'))
+
+    return render_template('account.html', title='Account', formE=formE , formP=formP ,formS=formS)
 
 @app.route("/cinema/<int:id>")
 @login_required
@@ -165,9 +151,7 @@ def cinema(id):
     comments = Comment.query.all()
     return render_template('cinema.html', title=movie.title, movie=movie, comments=comments)
 
-@app.errorhandler(404)
-def not_found_error(error):
-    return render_template('404.html'),404
+
 
 @app.route('/movies', methods=['GET', 'POST'])
 def movies():
@@ -180,6 +164,16 @@ def movies():
         else:
             flash('Type some title!', 'danger')
     return render_template('movies.html', movies=Movies)
+
+    
+@app.route("/logout")
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
+
+@app.errorhandler(404)
+def not_found_error(error):
+    return render_template('404.html'),404
 
 if __name__ == '__main__':
     app.run(debug=True)

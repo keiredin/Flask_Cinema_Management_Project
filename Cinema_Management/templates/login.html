@@ -19,42 +19,123 @@
             <label for="signup" class="slide signup">Signup</label>
             <div class="slider-tab"></div>
             </div>
+
+            <!-- login form area -->
             <div class="form-inner">
             <form class="login" id="signinform" method="POST" action="">
-                <div class="field">
-                <span class="fa fa-user icons" aria-hidden="true"></span>
-                <input type="email" placeholder="Email Address" name="userEmailLog" required class="emailform">
-                </div>
-                <div class="field">
-                <span class="fa fa-lock icons" aria-hidden="true"></span>
-                <input type="password" placeholder="Password" name="userPasswordLog" required class="password">
-                </div>
+                {{ form.hidden_tag() }}
+
+                <!-- email field -->
+                {% if form.email.errors %}
+                    {{ form.email(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.email.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="field">
+                        <span class="fa fa-user icons" aria-hidden="true"></span>
+                        {{ form.email(class="form-control  form-control-lg", placeholder="Email Address")}}
+                    </div>
+                {% endif %}
+
+                
+                <!-- password field -->
+                {% if form.password.errors %}
+                    {{ form.password(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.password.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+
+                {% else %}
+                    <div class="field">
+                        <span class="fa fa-lock icons" aria-hidden="true"></span>
+                        {{ form.password(class="form-control  form-control-lg", placeholder="Password")}}
+                    </div>
+                {% endif %}
+                <!-- <div class="field"></div>
+                <div class="field"></div> -->
+                
                 <div class="field btn">
                 <div class="btn-layer"></div>
-                <input type="submit" name="login" value="Login">
+                    {{ form.submit(class="btn btn-outline-info",value="Login") }}
                 </div>
                 <div class="signup-link">Don't have account? <a href="">Signup now</a></div>
+
             </form>
+
+            <!-- signUp form area -->
             <form class="signup" id="signupform" method="POST" action="">
-                <div class="field">
-                    <span class="fa fa-user icons" aria-hidden="true"></span>
-                    <input type="text" placeholder="Username" name="userName" required class="emailform">
-                </div>
-                <div class="field">
-                    <span class="fa fa-envelope-square icons" aria-hidden="true"></span>
-                    <input type="email" placeholder="Email Address" name="userEmail" required class="emailform">
-                </div>
-                <div class="field">
-                    <span class="fa fa-lock icons" aria-hidden="true"></span>
-                    <input type="password" placeholder="Password" name="userPassword" required class="password">
-                </div>
-                <div class="field">
-                    <span class="fa fa-lock icons" aria-hidden="true"></span>
-                    <input type="password" placeholder="Confirm password" name="userCP" required class="confirmPassword">
-                </div>
+                {{ form2.hidden_tag() }}
+
+                <!-- username field -->
+                {% if form2.username.errors %}
+                    {{ form2.username(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form2.username.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="field">
+                        <span class="fa fa-user icons" aria-hidden="true"></span>
+                        {{ form2.username(class="form-control form-control-lg" ,placeholder="Username" )}}
+                        
+                    </div>
+                {% endif %}
+
+                <!-- Email address area -->
+                {% if form2.email.errors %}
+                    {{ form2.email(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form2.email.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="field">
+                        <span class="fa fa-envelope-square icons" aria-hidden="true"></span>
+                        {{ form2.email(class="form-control form-control-lg", placeholder="Email Address") }}   
+                    </div>
+                {% endif %}
+                    
+                <!-- Email address area -->
+            
+                {% if form2.password.errors %}
+                    {{ form2.password(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form2.password.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="field">
+                        <span class="fa fa-lock icons" aria-hidden="true"></span>
+                        {{ form2.password(class="form-control form-control-lg",placeholder="Password") }}
+                    </div>
+                {% endif %}
+
+                <!-- confirm_password area -->
+                {% if form2.confirm_password.errors %}
+                    {{ form2.confirm_password(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form2.confirm_password.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="field">
+                        <span class="fa fa-lock icons" aria-hidden="true"></span>
+                        {{ form2.confirm_password(class="form-control form-control-lg",placeholder="Confirm password") }}
+                    </div>   
+                {% endif %}
                 <div class="field btn">
                     <div class="btn-layer"></div>
-                    <input type="submit" name="signup" value="Signup">
+                    {{ form2.submit(class="btn btn-outline-info") }}
+                    
                 </div>
             </form>
             
@@ -66,6 +147,7 @@
 {% endblock content %}
 {% block otherjs%}
     <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+    <script src="../static/js/navbar.js"></script>
 {%endblock%}
 
 
